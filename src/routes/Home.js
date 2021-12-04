@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { connect } from "react-redux";
+import shortid from "shortid";
 import Todo from "../components/Todos";
 import { useInput } from "../hooks/useInput";
 import { addTodo } from "../store";
@@ -31,12 +32,14 @@ const Home = ({ state, dAddTodo }) => {
 };
 
 function mapStateToProps(state) {
+  console.log(state);
   return { state };
 }
 
 export function mapDispatchProps(dispatch) {
   return {
-    dAddTodo: (content) => dispatch(addTodo(content)),
+    dAddTodo: (content) =>
+      dispatch(addTodo({ content, id: shortid.generate(), isDone: false })),
   };
 }
 

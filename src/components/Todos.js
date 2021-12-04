@@ -9,22 +9,23 @@ const Todo = ({
   dComplishTodo,
 }) => {
   return (
-    <Li onClick={() => dComplishTodo(id)} isDone={isDone} key={id}>
-      {content}
+    <li key={id}>
+      <Span onClick={() => dComplishTodo(id)} isDone={isDone}>
+        {content}
+      </Span>
       <button onClick={() => dDeleteTodo(id)}>삭제</button>
-    </Li>
+    </li>
   );
 };
 
-const Li = styled.li`
+const Span = styled.span`
   color: ${({ isDone }) => (isDone ? "red" : "black")};
 `;
 
 function mapDispatchProps(dispatch, { todo }) {
-  console.log(todo);
   return {
-    dComplishTodo: () => dispatch(complishTodo(todo.id)),
-    dDeleteTodo: () => dispatch(deleteTodo(todo.id)),
+    dComplishTodo: () => dispatch(complishTodo({ id: todo.id })),
+    dDeleteTodo: () => dispatch(deleteTodo({ id: todo.id })),
   };
 }
 
