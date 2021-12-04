@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import shortid from "shortid";
 import Todo from "../components/Todos";
 import { useInput } from "../hooks/useInput";
-import { addTodo } from "../store";
+import { addTodo, todos } from "../store";
 
 const Home = ({ state, dAddTodo }) => {
   const { value: content, onChange, setValue } = useInput("");
@@ -32,14 +32,15 @@ const Home = ({ state, dAddTodo }) => {
 };
 
 function mapStateToProps(state) {
-  console.log(state);
   return { state };
 }
 
 export function mapDispatchProps(dispatch) {
   return {
     dAddTodo: (content) =>
-      dispatch(addTodo({ content, id: shortid.generate(), isDone: false })),
+      dispatch(
+        todos.actions.add({ content, id: shortid.generate(), isDone: false })
+      ),
   };
 }
 

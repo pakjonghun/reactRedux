@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { complishTodo, deleteTodo } from "../store";
+import { complishTodo, deleteTodo, todos } from "../store";
 
 const Todo = ({
   todo: { id, content, isDone },
@@ -24,8 +24,8 @@ const Span = styled.span`
 
 function mapDispatchProps(dispatch, { todo }) {
   return {
-    dComplishTodo: () => dispatch(complishTodo({ id: todo.id })),
-    dDeleteTodo: () => dispatch(deleteTodo({ id: todo.id })),
+    dComplishTodo: () => dispatch(todos.actions.complete({ id: todo.id })),
+    dDeleteTodo: () => dispatch(todos.actions.delete({ id: todo.id })),
   };
 }
 
